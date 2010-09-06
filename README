@@ -1,0 +1,10 @@
+This will, hopefully and in time, be a game inspired by Dwarf Fortress, Minecraft and others.
+
+Basically, it's at the moment nothing more but a bunch of code I quickly hacked together.
+It's written in ruby and requires the Gosu library from libgosu.org
+
+I don't have a spec or anything, I just add things I want. I refactor things when I feel it's needed and
+can gather the required motivation and time to do so.
+
+
+This is a very young project. Don't expect too much of it. Or anything at all!
