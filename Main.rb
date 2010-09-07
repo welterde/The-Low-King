@@ -2,6 +2,8 @@
 require 'rubygems'
 require 'gosu'
 
+$LOAD_PATH << File.join(File.dirname(__FILE__) )
+
 require 'ext'
 require 'misc'
 require 'map'
