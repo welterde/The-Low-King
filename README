@@ -2,6 +2,7 @@ This will, hopefully and in time, be a game inspired by Dwarf Fortress, Minecraf
 
 Basically, it's at the moment nothing more but a bunch of code I quickly hacked together.
 It's written in ruby and requires the Gosu library from libgosu.org
+It also uses the ruy-opengl gem if it is available.
 
 I don't have a spec or anything, I just add things I want. I refactor things when I feel it's needed and
 can gather the required motivation and time to do so.
