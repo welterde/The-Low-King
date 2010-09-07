@@ -78,15 +78,11 @@ class Map
   end
   
   def select( mx,my )
-    d = get_data(mx,my)
-    d[:selected] = true
-    set_data(mx,my, d)
+    set_attribute( mx,my, :selected, true )
   end
   
   def unselect( mx,my )
-    d = get_data(mx,my)
-    d[:selected] = false
-    set_data(mx,my, d)
+    set_attribute( mx,my, :selected, false )
   end
   
   def selected?(mx,my)
@@ -165,6 +161,8 @@ class Map
         set_attribute(x+xo,y+yo, :seen, true )
       end
     end
+
+    set_attribute( x,y, :selected, false )
 
     r = nil
     case mined
