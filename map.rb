@@ -20,12 +20,16 @@ class Map
 
     MAP_WIDTH.times do |x|
       MAP_HEIGHT.times do |y|
-        set_data( x,y, :blocks=>[AIR,DIRT], :seen => false, :selected => false )
+        set_data( x,y, :blocks=>[AIR,DIRT], :outside => true, :seen => true, :selected => false )
         
         #set_tile( x,y, [AIR,DIRT] )
-        
-        set_tile(x,y, [ROCK,ROCK] ) if x >= MAP_WIDTH/4
-          
+
+        if x >= MAP_WIDTH/4
+          set_tile(x,y, [ROCK,ROCK] )
+          set_attribute( x,y, :outside, false )
+          set_attribute( x,y, :seen, false ) unless x == MAP_WIDTH/4
+        end
+
       end
     end
 
@@ -115,6 +119,17 @@ class Map
     d[:blocks] = v
     set_data(x,y, d)
   end
+
+  def set_attribute( x,y, attribute, value )
+    d = get_data(x,y)
+    d[attribute] = value
+    set_data( x,y, d )
+  end
+
+  def get_attribute( x,y, attrib )
+    d = get_data(x,y)
+    d[attrib]
+  end
   
   
   def find_free_spots( x,y )
@@ -143,8 +158,14 @@ class Map
     t = get_tile( x,y )
     mined = t[0]
     t[0] = AIR
-    set_tile( x,y, t )    
-    
+    set_tile( x,y, t )
+
+    [-1,0,1].each do |xo|
+      [-1,0,1].each do |yo|
+        set_attribute(x+xo,y+yo, :seen, true )
+      end
+    end
+
     r = nil
     case mined
     when ROCK
@@ -174,22 +195,25 @@ class Map
 
         tile =  get_tile(mx,my)
         data = get_data(mx,my)
-        if tile
+
+        
+        if tile and get_attribute(mx,my,:seen)
           block = tile[0]
           floor = tile[1]
 
           if block != AIR
             #puts "#{block}"
-            @tilemap[block].draw( sx,sy, ZOrder::WALL )
-            if data[:selected]
-              c = 0x77FFFFFF
-              $win.draw_quad( sx,sy,c, sx+8,sy,c, sx,sy+8,c, sx+8,sy+8,c, ZOrder::WALL )
-            end
-            
+            @tilemap[block].draw( sx,sy, ZOrder::WALL )            
           else
             @tilemap[floor].draw( sx,sy, ZOrder::FLOOR,1,1, 0xffaaaaaa )
           end
         end
+
+        if data[:selected]
+          c = 0x77FFFF00
+          $win.draw_quad( sx,sy,c, sx+8,sy,c, sx,sy+8,c, sx+8,sy+8,c, ZOrder::WALL )
+        end
+
 
       end
     end
