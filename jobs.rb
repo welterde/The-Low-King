@@ -6,10 +6,11 @@ class Job
   @@list = []
   
   def Job.fetch
-    @@list.each do |j|
+    @@list.each_with_index do |j,i|
       taken = yield j
       if taken
         @@list.delete j
+        puts "Selected job #{i}: #{j}"
         return j
       end
     end
