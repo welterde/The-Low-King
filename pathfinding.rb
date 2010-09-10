@@ -217,6 +217,7 @@ class PathPlanner
   end
 
   def PathPlanner.tick
+    5.times do
     @@work.delete_if do |w|
       w.tick
       if w.done?
@@ -229,6 +230,7 @@ class PathPlanner
       else
         false
       end
+    end
     end
   end
 
