@@ -42,9 +42,6 @@ class Game < Gosu::Window
     d1.place( 8,5 )
     d2 = Dwarf.new
     d2.place( 8,6 )
-
-    #@d2 = Dwarf.new
-    #@d2.place( 10,6 )
     
     @entity_timer = Time.now.to_f + ENTITY_TIME_STEP
     @selected_dwarf = nil
