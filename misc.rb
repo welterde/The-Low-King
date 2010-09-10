@@ -18,8 +18,8 @@ end
 module POrder
   
   LOW = 0
-  MEDIUM = 50
-  HIGH = 100
+  MEDIUM = 100
+  HIGH = 200
   CRITICAL = 666
   
 end
